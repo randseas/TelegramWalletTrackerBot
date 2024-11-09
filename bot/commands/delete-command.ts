@@ -3,7 +3,6 @@ import { SUB_MENU } from "../../config/bot-menus";
 import { PublicKey } from "@solana/web3.js";
 import { userExpectingAddWalletAddress } from "../../constants/flags";
 import { DeleteWalletMessage } from "../messages/delete-wallet-message";
-import { GeneralMessages } from "../messages/general-messages";
 import { JsonDatabase } from "../../db/db";
 import { Wallet } from "../../types/general-interfaces";
 

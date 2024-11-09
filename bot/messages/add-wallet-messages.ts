@@ -1,16 +1,15 @@
 export class AddWalletMessage {
   constructor() {}
-
   public sendAddWalletMessage() {
-    const messageText = `
-🐱 Ok, just send me a wallet address to track:
+    const messageText = `<b>ScAlp Wallet Tracker</b>
 
-You can also give that wallet a name by following the address with the desired name, or add multiple wallets at once by sending them each on a new line for example: 
+<b>➕ Cüzdan ekleme</b>
 
-walletAddress1 walletName1
-walletAddress2 walletName2
-`
+Cüzdan adreslerini aşağıdaki formatta gönderin, aynı anda birden fazla cüzdan adresi ekleyebilirsiniz.
 
-    return messageText
+cüzdanAdresi1 cüzdanAdı1
+cüzdanAdresi2 cüzdanAdı2
+`;
+    return messageText;
   }
 }

@@ -4,12 +4,11 @@ export class UserSettingsMessages {
   public sendSettingsMessage(): string {
     const messageText = `<b>ScAlp Wallet Tracker</b>
     
-<b>⚙️ Settings</b>
+<b>⚙️ Ayarlar</b>
 
-You can pause or resume bot at anytime just by clicking the button below ✨
-
-If you pause Bot, you will no longer get more messages until you resume the bot from this same menu
-`
-    return messageText
+Aşağıdaki düğmeye tıklayarak botu istediğiniz zaman duraklatabilir veya devam ettirebilirsiniz
+Botu duraklatırsanız, botu aynı menüden devam ettirene kadar artık daha fazla mesaj almayacaksınız
+`;
+    return messageText;
   }
 }

@@ -4,8 +4,12 @@ import { START_MENU } from "../../config/bot-menus";
 import { ManageCommand } from "../commands/manage-command";
 import { DeleteCommand } from "../commands/delete-command";
 import {
-  userExpectingDonation,
-  userExpectingWalletAddress,
+  userExpectingAddWalletAddress,
+  userExpectingRemoveWalletAddress,
+  userExpectingUpdateWalletAddress,
+  userExpectingEditWalletAddress,
+  userExpectingActivateUserName,
+  userExpectingDeactivateUserName,
 } from "../../constants/flags";
 import { GeneralMessages } from "../messages/general-messages";
 import { SettingsCommand } from "../commands/settings-command";
@@ -40,11 +44,11 @@ export class CallbackQueryHandler {
         case "add":
           this.addCommand.addButtonHandler(message);
           break;
-        case "manage":
-          await this.manageCommand.manageButtonHandler(message);
-          break;
         case "delete":
           this.deleteCommand.deleteButtonHandler(message);
+          break;
+        case "manage":
+          await this.manageCommand.manageButtonHandler(message);
           break;
         case "settings":
           this.settingsCommand.settingsCommandHandler(message);
@@ -52,10 +56,17 @@ export class CallbackQueryHandler {
         case "pause-resume-bot":
           await this.updateBotStatusHandler.pauseResumeBot(message);
           break;
+        case "back_to_manage_menu":
+          await this.manageCommand.manageButtonHandler(message);
+          break;
         case "back_to_main_menu":
           const messageText = this.generalMessages.sendStartMessage();
-          userExpectingWalletAddress[Number(chatId)] = false;
-          userExpectingDonation[Number(chatId)] = false;
+          userExpectingAddWalletAddress[String(chatId)] = false;
+          userExpectingRemoveWalletAddress[String(chatId)] = false;
+          userExpectingUpdateWalletAddress[String(chatId)] = false;
+          userExpectingEditWalletAddress[String(chatId)] = false;
+          userExpectingActivateUserName[String(chatId)] = false;
+          userExpectingDeactivateUserName[String(chatId)] = false;
           this.bot.editMessageText(messageText, {
             chat_id: chatId,
             message_id: message.message_id,

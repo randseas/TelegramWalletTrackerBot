@@ -1,16 +1,15 @@
 export class DeleteWalletMessage {
   constructor() {}
-
   public sendDeleteWalletMessage() {
-    const messageText = `
-Send me the wallet address you want to remove 🗑️
+    const messageText = `<b>ScAlp Wallet Tracker</b>
 
-You can also delete multiple wallets at once if you send them each on a new line, for example:
+<b>🗑️ Cüzdan silme</b>
 
-walletAddress1
-walletAddress2
-        `
+Cüzdan adreslerini aşağıdaki formatta gönderin, aynı anda birden fazla cüzdan adresi silebilirsiniz.
 
-    return messageText
+cüzdanAdresi1
+cüzdanAdresi2
+`;
+    return messageText;
   }
 }

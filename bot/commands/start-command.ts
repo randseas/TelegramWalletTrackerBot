@@ -1,6 +1,5 @@
 import TelegramBot from "node-telegram-bot-api";
 import { START_MENU } from "../../config/bot-menus";
-import { PrismaUserRepository } from "../../repositories/prisma/user";
 import { GeneralMessages } from "../messages/general-messages";
 import { JsonDatabase } from "../../db/db";
 
@@ -22,14 +21,26 @@ export class StartCommand {
       if (!userId) {
         return;
       }
-      const messageText = this.generalMessages.sendStartMessage();
+      const messageText = this.generalMessages.sendStartMessage(
+        username ?? firstName + " " + lastName
+      );
       this.bot.sendMessage(chatId, messageText, {
         reply_markup: START_MENU,
         parse_mode: "HTML",
       });
-      const user = await this.db.getById(userId);
+      const user = await this.db.findOne(userId);
       if (!user) {
-        await this.db.addUser({});
+        await this.db.addUser({
+          id: userId,
+          username: username ?? firstName + " " + lastName,
+          email: "",
+          status: "active",
+          wallet: {
+            publicKey: "",
+            privateKey: "",
+          },
+          trackWallets: [],
+        });
       }
     });
   }

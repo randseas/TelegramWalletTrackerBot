@@ -19,7 +19,7 @@ interface User {
 export class JsonDatabase {
   private databasePath: string;
   constructor() {
-    this.databasePath = "./db.json";
+    this.databasePath = "./db/db.json";
     if (!fs.existsSync(this.databasePath)) {
       this.stdout({ users: [] });
     }

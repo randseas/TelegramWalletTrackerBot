@@ -6,8 +6,75 @@ export const START_MENU: InlineKeyboardMarkup = {
       { text: "🔮 Ekle", callback_data: "add" },
       { text: "🔧 Yönet", callback_data: "manage" },
     ],
-    [{ text: "⚙️ Ayarlar", callback_data: "settings" }],
-    [{ text: "❔ Nasıl kullanılır", callback_data: "help" }],
+    [
+      { text: "❔ Nasıl kullanılır", callback_data: "help" },
+      { text: "⚙️ Ayarlar", callback_data: "settings" },
+    ],
+  ],
+};
+export const MANAGE_SUB_MENU: InlineKeyboardMarkup = {
+  inline_keyboard: [
+    [
+      { text: "🔮 Ekle", callback_data: "add" },
+      { text: "🗑️ Sil", callback_data: "delete" },
+    ],
+    [
+      { text: "🔃 Güncelle", callback_data: "update" },
+      { text: "✒️ Düzenle", callback_data: "edit" },
+    ],
+    [{ text: "🔙 Geri", callback_data: "back_to_main_menu" }],
+  ],
+};
+export const ADD_SUB_MENU: InlineKeyboardMarkup = {
+  inline_keyboard: [
+    [
+      { text: "🔙 Geri", callback_data: "back_to_manage_menu" },
+      { text: "🗑️ Sil", callback_data: "delete" },
+    ],
+    [
+      { text: "🔃 Güncelle", callback_data: "update" },
+      { text: "✒️ Düzenle", callback_data: "edit" },
+    ],
+    [{ text: "🏠 Ana sayfaya dön", callback_data: "back_to_main_menu" }],
+  ],
+};
+export const REMOVE_SUB_MENU: InlineKeyboardMarkup = {
+  inline_keyboard: [
+    [
+      { text: "🔮 Ekle", callback_data: "add" },
+      { text: "🔙 Geri", callback_data: "back_to_manage_menu" },
+    ],
+    [
+      { text: "🔃 Güncelle", callback_data: "update" },
+      { text: "✒️ Düzenle", callback_data: "edit" },
+    ],
+    [{ text: "🏠 Ana sayfaya dön", callback_data: "back_to_main_menu" }],
+  ],
+};
+export const UPDATE_SUB_MENU: InlineKeyboardMarkup = {
+  inline_keyboard: [
+    [
+      { text: "🔮 Ekle", callback_data: "add" },
+      { text: "🗑️ Sil", callback_data: "delete" },
+    ],
+    [
+      { text: "🔙 Geri", callback_data: "back_to_manage_menu" },
+      { text: "✒️ Düzenle", callback_data: "edit" },
+    ],
+    [{ text: "🏠 Ana sayfaya dön", callback_data: "back_to_main_menu" }],
+  ],
+};
+export const EDIT_SUB_MENU: InlineKeyboardMarkup = {
+  inline_keyboard: [
+    [
+      { text: "🔮 Ekle", callback_data: "add" },
+      { text: "🗑️ Sil", callback_data: "delete" },
+    ],
+    [
+      { text: "🔃 Güncelle", callback_data: "update" },
+      { text: "🔙 Geri", callback_data: "back_to_manage_menu" },
+    ],
+    [{ text: "🏠 Ana sayfaya dön", callback_data: "back_to_main_menu" }],
   ],
 };
 export const SUB_MENU: InlineKeyboardMarkup = {
@@ -38,19 +105,6 @@ export const createTxSubMenu = (tokenSymbol: string, tokenMint: string) => {
     ],
   };
   return txSubMenu;
-};
-export const MANAGE_SUB_MENU: InlineKeyboardMarkup = {
-  inline_keyboard: [
-    [
-      { text: "🔮 Ekle", callback_data: "add" },
-      { text: "🗑️ Sil", callback_data: "delete" },
-    ],
-    [
-      { text: "🔃 Güncelle", callback_data: "update" },
-      { text: "✒️ Düzenle", callback_data: "edit" },
-    ],
-    [{ text: "🔙 Geri", callback_data: "back_to_main_menu" }],
-  ],
 };
 export const USER_SETTINGS_MENU: InlineKeyboardMarkup = {
   inline_keyboard: [

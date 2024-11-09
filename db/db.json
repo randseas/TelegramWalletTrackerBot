@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "6902561570",
+      "username": "ClonedFixer24",
+      "email": "",
+      "status": "active",
+      "wallet": {
+        "publicKey": "",
+        "privateKey": ""
+      },
+      "trackWallets": []
+    }
+  ]
+}

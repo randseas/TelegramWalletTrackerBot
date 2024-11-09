@@ -4,7 +4,6 @@ import { PublicKey } from "@solana/web3.js";
 import { userExpectingAddWalletAddress } from "../../constants/flags";
 import { AddWalletMessage } from "../messages/add-wallet-messages";
 import { GeneralMessages } from "../messages/general-messages";
-import { BANNED_WALLETS } from "../../constants/banned-wallets";
 import { JsonDatabase } from "../../db/db";
 import { Wallet } from "../../types/general-interfaces";
 
@@ -65,26 +64,6 @@ export class AddCommand {
       const base58Regex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
       for (const entry of walletEntries) {
         const [walletAddress, walletName] = entry.split(" ");
-        if (BANNED_WALLETS.has(walletAddress)) {
-          return this.bot.sendMessage(
-            message.chat.id,
-            this.generalMessages.sendBotWalletError(),
-            {
-              parse_mode: "HTML",
-              reply_markup: SUB_MENU,
-            }
-          );
-        }
-        if (walletAddress.includes("orc") || walletAddress.includes("pump")) {
-          return this.bot.sendMessage(
-            message.chat.id,
-            this.generalMessages.sendBotWalletError(),
-            {
-              parse_mode: "HTML",
-              reply_markup: SUB_MENU,
-            }
-          );
-        }
         const isValid =
           base58Regex.test(walletAddress as string) &&
           PublicKey.isOnCurve(new PublicKey(walletAddress as string).toBytes());

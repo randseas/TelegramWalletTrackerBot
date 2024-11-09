@@ -5,7 +5,7 @@ export class ManageMessages {
   public async sendManageMessage(userWallets: Wallet[]) {
     const messageText = `<b>ScAlp Wallet Tracker</b>
 
-<b>📜 Cüzdanlar: ${userWallets.length}</b>
+<b>🔧 Yönet: ${userWallets.length}</b>
 
 ${userWallets
   .map((wallet, i) => {
