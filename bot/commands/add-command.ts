@@ -1,5 +1,5 @@
 import TelegramBot from "node-telegram-bot-api";
-import { SUB_MENU } from "../../config/bot-menus";
+import { ADD_SUB_MENU } from "../../config/bot-menus";
 import { PublicKey } from "@solana/web3.js";
 import { userExpectingAddWalletAddress } from "../../constants/flags";
 import { AddWalletMessage } from "../messages/add-wallet-messages";
@@ -39,12 +39,12 @@ export class AddCommand {
       this.bot.editMessageText(addMessage, {
         chat_id: message.chat.id,
         message_id: message.message_id,
-        reply_markup: SUB_MENU,
+        reply_markup: ADD_SUB_MENU,
         parse_mode: "HTML",
       });
     } else if (!isButton) {
       this.bot.sendMessage(message.chat.id, addMessage, {
-        reply_markup: SUB_MENU,
+        reply_markup: ADD_SUB_MENU,
         parse_mode: "HTML",
       });
     }
@@ -70,18 +70,18 @@ export class AddCommand {
         if (!isValid) {
           this.bot.sendMessage(
             message.chat.id,
-            `Address provided is not a valid solana wallet`
+            `Address provided is not a valid Solana wallet`
           );
           continue;
         }
         const user = await this.db.findOne(userId);
-        const isWalletAlready = user?.trackWallets.find(
+        const isWalletAlready = user?.trackWallets.some(
           (wallet: Wallet) => wallet.address === walletAddress
         );
         if (isWalletAlready) {
           this.bot.sendMessage(
             message.chat.id,
-            `You already follow the wallet: ${walletAddress}`
+            `Cüzdan adresini zaten takip ediyorsunuz: ${walletAddress}`
           );
           continue;
         }
@@ -92,12 +92,13 @@ export class AddCommand {
         });
         this.bot.sendMessage(
           message.chat.id,
-          `🎉 Wallet ${walletAddress} has been added.`
+          `🎉 Cüzdan: ${walletAddress} (${walletName}) başarıyla eklendi.`
         );
       }
       this.bot.removeListener("message", listener);
       userExpectingAddWalletAddress[Number(userId)] = false;
     };
+
     this.bot.once("message", listener);
   }
 }

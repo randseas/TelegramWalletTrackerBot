@@ -9,7 +9,13 @@
         "publicKey": "",
         "privateKey": ""
       },
-      "trackWallets": []
+      "trackWallets": [
+        {
+          "name": "test2",
+          "address": "2Eq6YD8P8QXTeoz9h6JHjgZ55t8RSxNdx4waMDCoPmQU",
+          "status": "active"
+        }
+      ]
     }
   ]
 }

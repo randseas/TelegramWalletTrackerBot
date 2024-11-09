@@ -1,5 +1,5 @@
 import TelegramBot from "node-telegram-bot-api";
-import { SUB_MENU } from "../../config/bot-menus";
+import { REMOVE_SUB_MENU } from "../../config/bot-menus";
 import { PublicKey } from "@solana/web3.js";
 import { userExpectingAddWalletAddress } from "../../constants/flags";
 import { DeleteWalletMessage } from "../messages/delete-wallet-message";
@@ -36,12 +36,12 @@ export class DeleteCommand {
       this.bot.editMessageText(addMessage, {
         chat_id: message.chat.id,
         message_id: message.message_id,
-        reply_markup: SUB_MENU,
+        reply_markup: REMOVE_SUB_MENU,
         parse_mode: "HTML",
       });
     } else if (!isButton) {
       this.bot.sendMessage(message.chat.id, addMessage, {
-        reply_markup: SUB_MENU,
+        reply_markup: REMOVE_SUB_MENU,
         parse_mode: "HTML",
       });
     }
