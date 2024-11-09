@@ -37,6 +37,9 @@ export class CallbackQueryHandler {
       const chatId = message?.chat.id;
       const data = callbackQuery.data;
       const userId = message?.chat.id.toString();
+      const username = message?.chat.username?.toString();
+      const firstName = message?.chat.first_name?.toString();
+      const lastName = message?.chat.last_name?.toString();
       if (!chatId || !userId) {
         return;
       }
@@ -60,7 +63,9 @@ export class CallbackQueryHandler {
           await this.manageCommand.manageButtonHandler(message);
           break;
         case "back_to_main_menu":
-          const messageText = this.generalMessages.sendStartMessage();
+          const messageText = this.generalMessages.sendStartMessage(
+            username ?? firstName + " " + lastName
+          );
           userExpectingAddWalletAddress[String(chatId)] = false;
           userExpectingRemoveWalletAddress[String(chatId)] = false;
           userExpectingUpdateWalletAddress[String(chatId)] = false;
