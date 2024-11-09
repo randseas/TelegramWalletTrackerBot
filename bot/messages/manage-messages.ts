@@ -1,29 +1,17 @@
-import { WalletDetails } from "../../lib/wallet-details";
+import { Wallet } from "../../types/general-interfaces";
 
 export class ManageMessages {
-  private walletDetails: WalletDetails;
-  constructor() {
-    this.walletDetails = new WalletDetails();
-  }
-  public async sendManageMessage(
-    userWallets: UserWallet[],
-    walletsAmt: number
-  ) {
+  constructor() {}
+  public async sendManageMessage(userWallets: Wallet[]) {
     const messageText = `<b>ScAlp Wallet Tracker</b>
 
-<b>📰 Cüzdanlar: ${userWallets.length} / ${walletsAmt}</b>
+<b>📜 Cüzdanlar: ${userWallets.length}</b>
 
 ${userWallets
   .map((wallet, i) => {
     const icon =
-      wallet.status === "ACTIVE"
-        ? ""
-        : wallet.status === "USER_PAUSED"
-          ? "⏸️ "
-          : wallet.status === "BANNED"
-            ? "🛑 "
-            : "";
-    return `${icon}${i + 1} - <code>${wallet.wallet.address}</code> ${wallet.name ? `(${wallet.name})` : ""}`;
+      wallet.status === "active" ? "" : wallet.status === "paused" ? "⏸️ " : "";
+    return `${icon}${i + 1} - <code>${wallet.address}</code> ${wallet.name ? `(${wallet.name})` : ""}`;
   })
   .join("\n\n")}
 `;

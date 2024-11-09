@@ -7,7 +7,6 @@ import {
   userExpectingDonation,
   userExpectingWalletAddress,
 } from "../../constants/flags";
-import { MyWalletCommand } from "../commands/mywallet-command";
 import { GeneralMessages } from "../messages/general-messages";
 import { SettingsCommand } from "../commands/settings-command";
 import { UpdateBotStatusHandler } from "./update-bot-status-handler";
@@ -16,7 +15,6 @@ export class CallbackQueryHandler {
   private addCommand: AddCommand;
   private manageCommand: ManageCommand;
   private deleteCommand: DeleteCommand;
-  private myWalletCommand: MyWalletCommand;
   private settingsCommand: SettingsCommand;
   private updateBotStatusHandler: UpdateBotStatusHandler;
   private generalMessages: GeneralMessages;
@@ -25,7 +23,6 @@ export class CallbackQueryHandler {
     this.addCommand = new AddCommand(this.bot);
     this.manageCommand = new ManageCommand(this.bot);
     this.deleteCommand = new DeleteCommand(this.bot);
-    this.myWalletCommand = new MyWalletCommand(this.bot);
     this.settingsCommand = new SettingsCommand(this.bot);
     this.updateBotStatusHandler = new UpdateBotStatusHandler(this.bot);
     this.generalMessages = new GeneralMessages();
@@ -54,12 +51,6 @@ export class CallbackQueryHandler {
           break;
         case "pause-resume-bot":
           await this.updateBotStatusHandler.pauseResumeBot(message);
-          break;
-        case "my_wallet":
-          this.myWalletCommand.myWalletCommandHandler(message);
-          break;
-        case "show_private_key":
-          this.myWalletCommand.showPrivateKeyHandler(message);
           break;
         case "back_to_main_menu":
           const messageText = this.generalMessages.sendStartMessage();

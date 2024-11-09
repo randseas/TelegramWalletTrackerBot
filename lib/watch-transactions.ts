@@ -3,12 +3,14 @@ import EventEmitter from "events";
 import { TransactionParser } from "../parsers/transaction-parser";
 import { SendTransactionMsgHandler } from "../bot/handlers/send-tx-msg-handler";
 import { bot } from "../providers/telegram";
-import { SwapType, WalletWithUsers } from "../types/swap-types";
+import { SwapType } from "../types/swap-types";
 import {
   JUPITER_PROGRAM_ID,
   PUMP_FUN_PROGRAM_ID,
   RAYDIUM_PROGRAM_ID,
 } from "../config/program-ids";
+import { User, Wallet } from "../types/general-interfaces";
+import { JsonDatabase } from "../db/db";
 
 export const trackedWallets: Set<string> = new Set();
 
@@ -16,14 +18,16 @@ export class WatchTransaction extends EventEmitter {
   public subscriptions: Map<string, number>;
   private walletTransactions: Map<string, { count: number; startTime: number }>;
   private excludedWallets: Map<string, boolean>;
+  private db: JsonDatabase;
   constructor(private connection: Connection) {
     super();
     this.subscriptions = new Map();
     this.walletTransactions = new Map();
     this.excludedWallets = new Map();
+    this.db = new JsonDatabase();
     this.connection = connection;
   }
-  public async watchSocket(wallets: WalletWithUsers[]): Promise<void> {
+  public async watchSocket(wallets: Wallet[]): Promise<void> {
     try {
       for (const wallet of wallets) {
         const publicKey = new PublicKey(wallet.address);
@@ -71,21 +75,17 @@ export class WatchTransaction extends EventEmitter {
             if (!parsed) {
               return;
             }
+            //send transaction messages to everyone
             const sendMessageHandler = new SendTransactionMsgHandler(bot);
-            const activeUsers = wallet.userWallets.filter(
-              (w: any) => w.status === "active"
-            );
-            const uniqueActiveUsers = Array.from(
-              new Set(activeUsers.map((user: any) => user.userId))
-            ).map((userId) =>
-              activeUsers.find((user: any) => user.userId === userId)
-            );
-            for (const user of uniqueActiveUsers) {
+            const activeUsers = this.db
+              .findAll()
+              .filter((user: User) => user.status === "active");
+            for (const user of activeUsers) {
               if (user) {
                 try {
-                  await sendMessageHandler.send(parsed, user.userId);
+                  await sendMessageHandler.send(parsed, user.id);
                 } catch (error) {
-                  console.log(`Error sending message to user ${user.userId}`);
+                  console.log(`Error sending message to user ${user.id}`);
                 }
               }
             }

@@ -18,18 +18,22 @@ export interface NativeParserInterface {
     tokenAmountOut: string;
   };
 }
+export interface SelfWallet {
+  publicKey: string;
+  privateKey: string;
+}
 export interface Wallet {
   name: string;
   address: string;
   status: "active" | "paused";
 }
-export interface CreateUserInterface {
+export interface User {
   id: string;
   username: string;
-  firstName: string;
-  lastName: string;
+  email: string;
   status: "active" | "paused";
-  wallets: Wallet[];
+  wallet: SelfWallet;
+  trackWallets: Wallet[];
 }
 export interface ParsedTxInfo {
   info: {
@@ -39,9 +43,4 @@ export interface ParsedTxInfo {
     source: string;
   };
   type: string;
-}
-export interface SetupWalletWatcherProps {
-  userId?: string | null;
-  walletId?: string | null;
-  event: "create" | "delete" | "initial" | "update";
 }

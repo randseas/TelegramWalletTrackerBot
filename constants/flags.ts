@@ -1,5 +1,7 @@
-import { WalletWithUsers } from '../types/swap-types'
+export const userExpectingAddWalletAddress: { [key: string]: boolean } = {};
+export const userExpectingRemoveWalletAddress: { [key: string]: boolean } = {};
+export const userExpectingUpdateWalletAddress: { [key: string]: boolean } = {};
+export const userExpectingEditWalletAddress: { [key: string]: boolean } = {};
 
-export const userExpectingWalletAddress: { [key: number]: boolean } = {}
-export const userExpectingDonation: { [key: number]: boolean } = {}
-export const walletsToTrack: WalletWithUsers[] = []
+export const userExpectingActivateUserName: { [key: string]: boolean } = {};
+export const userExpectingDeactivateUserName: { [key: string]: boolean } = {};
